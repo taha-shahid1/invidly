@@ -14,3 +14,6 @@ export interface SearchResult {
     htmlFormattedUrl: string;
     pagemap?: any;
 }
+export interface RankedResult extends SearchResult {
+    similarity: number;
+}
