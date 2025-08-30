@@ -1,6 +1,8 @@
 import { openaiClient } from '../../config/openai';
 import { readFile } from 'fs/promises';
 import { join } from 'path';
+
+// Types
 import type { SearchQueryResponse } from '../../types/search';
 
 
