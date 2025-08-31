@@ -18,7 +18,7 @@ const generateCacheKey = (query: string): string => {
     return `search:${query.toLowerCase().replace(/\s+/g, '-')}`;
 };
 
-const searchGoogle = async (queries: string[]): Promise<SearchResult[]> => {
+export const searchGoogle = async (queries: string[]): Promise<SearchResult[]> => {
     const redis = getRedisClient();
 
     const searchResults = await Promise.all(
@@ -65,5 +65,3 @@ const searchGoogle = async (queries: string[]): Promise<SearchResult[]> => {
 
     return searchResults.flat();
 };
-
-export default searchGoogle;

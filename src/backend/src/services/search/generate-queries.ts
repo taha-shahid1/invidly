@@ -10,22 +10,19 @@ export async function generateSearchQueries(naturalLanguageQuery: string): Promi
     try {
         // Load the prompt from file
         const promptPath = join(process.cwd(), 'src', 'prompts', 'search-query.txt');
-        const promptTemplate = await readFile(promptPath, 'utf-8');
-
-        // Replace placeholder with user's query
-        const prompt = promptTemplate.replace('{naturalLanguageQuery}', naturalLanguageQuery);
+        const prompt = await readFile(promptPath, 'utf-8');
 
         const response = await openaiClient.chat.completions.create({
             model: 'gpt-4o',
             messages: [
                 {
                     role: 'system',
-                    content: 'You are an assistant that converts natural language into structured search queries in JSON format.',
+                    content: prompt,
                 },
                 {
                     role: 'user',
-                    content: prompt,
-                },
+                    content: naturalLanguageQuery,
+                }
             ],
             temperature: 0.2, 
         });
